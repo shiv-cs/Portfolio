@@ -8,3 +8,6 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
 });
+export default defineConfig({
+  base: '/Portfolio/',  // base should match your repo name
+})
