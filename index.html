@@ -101,19 +101,19 @@
         }
 
         .profile-img-wrapper {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            border: 4px solid var(--natwest-purple);
-            padding: 8px;
-            background: linear-gradient(135deg, var(--natwest-purple), var(--natwest-blue));
-            box-shadow: 0 10px 40px rgba(95, 37, 159, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          width: 200px;
+          height: 200px;
+          margin: 0 auto 2rem;
+          border-radius: 50%;
+          border: 2px solid #222; /* Thinner and darker */
+          padding: 0;
+          background: white; /* prevents background from showing through */
+          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-
+        
         .profile-img {
           width: 100%;
           height: 100%;
@@ -122,7 +122,22 @@
           display: block;
         }
 
-
+        .logo {
+              /* your previous logo styles */
+        }
+        #navbar-logo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #logo-img {
+          transition: opacity 0.2s;
+          margin-left: 0;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
 
         h1 {
             font-size: 3rem;
@@ -324,7 +339,10 @@
 
     <header>
         <nav>
-            <div class="logo">SC</div>
+            <div class="logo" id="navbar-logo">
+              <span id="logo-text">SC</span>
+              <img id="logo-img" src="assets/pp.jpg" alt="Profile" style="display: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -593,5 +611,22 @@
             <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with passion for data and analytics.</p>
         </div>
     </footer>
+    <script>
+    window.addEventListener('scroll', function() {
+      const heroSection = document.querySelector('.hero');
+      const logoText = document.getElementById('logo-text');
+      const logoImg = document.getElementById('logo-img');
+      // Get hero bottom
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      // If scrolled past hero, show photo
+      if (heroBottom <= 0) {
+        logoText.style.display = "none";
+        logoImg.style.display = "inline-block";
+      } else {
+        logoText.style.display = "inline-block";
+        logoImg.style.display = "none";
+      }
+    });
+    </script>
 </body>
 </html>
