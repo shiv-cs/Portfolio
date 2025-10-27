@@ -92,9 +92,19 @@
             position: absolute; right: 2rem; top: 1rem; z-index: 120;
             display: none;
         }
-        .nav-links {
-            display: flex; gap: 2rem; list-style: none; margin-left: auto;
-        }
+       <!-- ...logo/profile code... -->
+    <div class="popup-menu-container">
+      <button class="popup-menu-btn" id="popupMenuBtn">&#9776;</button>
+      <div class="popup-menu" id="popupMenu">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
         .nav-links a {
             color: var(--text-secondary); text-decoration: none;
             transition: color 0.3s; font-weight: 500;
@@ -186,6 +196,61 @@
             .skills-grid {grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));}
             #navbar-logo {min-width: 150px;}
         }
+        .popup-menu-container {
+      position: fixed;
+      top: 20px;
+      right: 36px;
+      z-index: 150;
+    }
+
+        /* Hamburger button */
+    .popup-menu-btn {
+      background: white;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.3rem 0.7rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    /* Popup styling */
+    .popup-menu {
+      display: none;
+      position: absolute;
+      top: 48px;
+      right: 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+      padding: 1rem 2rem;
+      min-width: 170px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .popup-menu a {
+      text-decoration: none;
+      color: #444;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      display: block;
+      transition: color 0.2s;
+    }
+    .popup-menu a:hover {
+      color: var(--natwest-blue);
+    }
+
+    /* Show popup menu when toggled */
+    .popup-menu.active {
+      display: flex;
+    }
+
+    /* Hide background nav links completely */
+    .nav-links {
+      display: none !important;
+    }
+
     </style>
 </head>
 <body>
@@ -480,6 +545,20 @@
                 header.classList.remove('scrolled');
               }
             });
+    </script>
+    <script>
+    const popupMenuBtn = document.getElementById('popupMenuBtn');
+    const popupMenu = document.getElementById('popupMenu');
+    document.addEventListener('click', function(event) {
+      // Toggle if hamburger clicked
+      if (event.target === popupMenuBtn) {
+        popupMenu.classList.toggle('active');
+      } 
+      // Close popup if clicked outside
+      else if (!popupMenu.contains(event.target)) {
+        popupMenu.classList.remove('active');
+      }
+    });
     </script>
 </body>
 </html>
