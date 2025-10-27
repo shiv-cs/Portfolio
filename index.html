@@ -125,19 +125,29 @@
         .logo {
               /* your previous logo styles */
         }
-        #navbar-logo {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+       #logo-text, #logo-img {
+          opacity: 1;
+          transition: opacity 0.4s;
+          position: absolute;
         }
+
+        #navbar-logo {
+          position: relative;
+          width: 40px;
+          height: 40px;
+        }
+
         #logo-img {
-          transition: opacity 0.2s;
-          margin-left: 0;
           width: 40px;
           height: 40px;
           border-radius: 50%;
           object-fit: cover;
+          top: 0;
+          left: 0;
+          opacity: 0; /* start hidden */
+          pointer-events: none;
         }
+
 
         h1 {
             font-size: 3rem;
@@ -341,7 +351,7 @@
         <nav>
             <div class="logo" id="navbar-logo">
               <span id="logo-text">SC</span>
-              <img id="logo-img" src="assets/pp.jpg" alt="Profile" style="display: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+              <img id="logo-img" src="assets/pp.jpg" alt="Profile">
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -613,18 +623,17 @@
     </footer>
     <script>
     window.addEventListener('scroll', function() {
-      const heroSection = document.querySelector('.hero');
+     const heroSection = document.querySelector('.hero');
       const logoText = document.getElementById('logo-text');
       const logoImg = document.getElementById('logo-img');
-      // Get hero bottom
       const heroBottom = heroSection.getBoundingClientRect().bottom;
-      // If scrolled past hero, show photo
+
       if (heroBottom <= 0) {
-        logoText.style.display = "none";
-        logoImg.style.display = "inline-block";
+        logoText.style.opacity = "0";
+        logoImg.style.opacity = "1";
       } else {
-        logoText.style.display = "inline-block";
-        logoImg.style.display = "none";
+        logoText.style.opacity = "1";
+        logoImg.style.opacity = "0";
       }
     });
     </script>
