@@ -125,42 +125,60 @@
         .logo {
               /* your previous logo styles */
         }
-        #logo-text, #logo-img, #logo-name {
-          transition: opacity 0.4s;
-          position: absolute;
-          top: 0;
-          left: 0;
-          opacity: 1;
-        }
-
-       #navbar-logo {
-          position: relative;
-          display: flex;
-          align-items: center;
-          height: 40px;
-        }
+        #logo-text {
+              position: relative;
+              transition: opacity 0.4s;
+              font-size: 1.5rem;
+              font-weight: 700;
+              background: linear-gradient(135deg, var(--natwest-purple-light), var(--natwest-blue));
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              opacity: 1;
+              z-index: 2;
+            }
+            #navbar-logo {
+              display: flex;
+              align-items: center;
+              min-width: 250px;
+              height: 40px;
+              position: relative;
+            }
+            #logo-image-block {
+              display: flex;
+              align-items: center;
+              position: absolute;
+              left: 0;
+              opacity: 0;
+              transition: opacity 0.4s;
+              z-index: 2;
+            }
         
         #logo-img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-          margin-right: 0.5rem;
-          opacity: 0;
-          pointer-events: none;
-          z-index: 1;
-        }
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+              margin-right: 0.5rem;
+            }
 
         #logo-name {
-          left: 45px;
-          font-weight: bold;
-          font-size: 1rem;
-          color: #000;
-          opacity: 0;
-          white-space: nowrap;
-          z-index: 2;
-        }
-
+              font-weight: bold;
+              font-size: 1rem;
+              color: #222;
+              white-space: nowrap;
+            }
+            header.scrolled #logo-text {
+              opacity: 0;
+              pointer-events: none;
+            }
+            header.scrolled #logo-image-block {
+              opacity: 1;
+              pointer-events: auto;
+            }
+            header:not(.scrolled) #logo-image-block {
+              opacity: 0;
+              pointer-events: none;
+            }
         /* Hamburger for mobile */
         .nav-toggle-label {
           font-size: 2rem;
@@ -405,12 +423,14 @@
     <header>
         <nav>
           <!-- Logo and Name, transition effect -->
-          <div class="logo" id="navbar-logo">
-            <span id="logo-text">SC</span>
-            <img id="logo-img" src="assets/pp.jpg" alt="Profile">
-            <span id="logo-name" style="color: black;">Shiva Chaitanya</span>
+          <<div class="logo" id="navbar-logo">
+             <span id="logo-text">SC</span>
+              <span id="logo-image-block">
+                <img id="logo-img" src="assets/pp.jpg" alt="Profile">
+                <span id="logo-name">Shiva Chaitanya</span>
+              </span>
+            </div>
 
-          </div>
   
           <!-- Mobile Hamburger toggle -->
           <input type="checkbox" id="nav-toggle" style="display:none;">
@@ -688,22 +708,15 @@
     </footer>
     <script>
        window.addEventListener('scroll', function() {
-          const heroSection = document.querySelector('.hero');
-          const logoText = document.getElementById('logo-text');
-          const logoImg = document.getElementById('logo-img');
-          const logoName = document.getElementById('logo-name');
-          const heroBottom = heroSection.getBoundingClientRect().bottom;
-
-          if (heroBottom <= 0) {
-            logoText.style.opacity = "0";
-            logoImg.style.opacity = "1";
-            logoName.style.opacity = "1";
-          } else {
-            logoText.style.opacity = "1";
-            logoImg.style.opacity = "0";
-            logoName.style.opacity = "0";
-          }
-        });
+              const heroSection = document.querySelector('.hero');
+              const header = document.querySelector('header');
+              const heroBottom = heroSection.getBoundingClientRect().bottom;
+              if (heroBottom <= 0) {
+                header.classList.add('scrolled');
+              } else {
+                header.classList.remove('scrolled');
+              }
+            });
     </script>
 </body>
 </html>
